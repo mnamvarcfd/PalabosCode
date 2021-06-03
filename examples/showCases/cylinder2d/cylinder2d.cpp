@@ -168,13 +168,60 @@ void cylinderSetup( MultiBlockLattice2D<T,DESCRIPTOR>& lattice,
             lattice, lattice.getBoundingBox(),
             PoiseuilleVelocityAndDensity<T>(parameters) );
 
-    plint cx     = nx/4;
-    plint cy     = ny/2+2; // cy is slightly offset to avoid full symmetry,
-                          //   and to get a Von Karman Vortex street.
-    plint radius = cy/4;
-    defineDynamics(lattice, lattice.getBoundingBox(),
-                   new CylinderShapeDomain2D<T>(cx,cy,radius),
-                   new plb::BounceBack<T,DESCRIPTOR>);
+
+    double dx = 1.0;
+    double Xc = ny;
+    double Yc = ny;
+
+    double R = 1.285 * ny;
+
+    double offset = .1 * ny;
+
+    int nCircles = 19;
+    double* xc = new double[nCircles];
+    double* yc = new double[nCircles];
+    double* radius = new double[nCircles];
+
+    xc[0] = offset + Xc * 0.74; yc[0] = Yc * 0.26; radius[0] = R * 0.06;
+    xc[1] = offset + Xc * 0.26; yc[1] = Yc * 0.24; radius[1] = R * 0.21;
+    xc[2] = offset + Xc * 0.15; yc[2] = Yc * 0.54; radius[2] = R * 0.09;
+    xc[3] = offset + Xc * 0.23; yc[3] = Yc * 0.81; radius[3] = R * 0.17;
+    xc[4] = offset + Xc * 0.60; yc[4] = Yc * 0.13; radius[4] = R * 0.11;
+    xc[5] = offset + Xc * 0.62; yc[5] = Yc * 0.58; radius[5] = R * 0.26;
+    xc[6] = offset + Xc * 0.48; yc[6] = Yc * 0.91; radius[6] = R * 0.08;
+    xc[7] = offset + Xc * 0.81; yc[7] = Yc * 0.10; radius[7] = R * 0.09;
+    xc[8] = offset + Xc * 1.10; yc[8] = Yc * 0.34; radius[8] = R * 0.26;
+    xc[9] = offset + Xc * 0.75; yc[9] = Yc * 0.91; radius[9] = R * 0.08;
+    xc[10] = offset + Xc * 1.03; yc[10] = Yc * 0.8; radius[10] = R * 0.19;
+    xc[11] = offset + Xc * 1.36; yc[11] = Yc * 0.09; radius[11] = R * 0.07;
+    xc[12] = offset + Xc * 1.39; yc[12] = Yc * 0.68; radius[12] = R * 0.16;
+    xc[13] = offset + Xc * 1.29; yc[13] = Yc * 0.91; radius[13] = R * 0.07;
+    xc[14] = offset + Xc * 1.66; yc[14] = Yc * 0.31; radius[14] = R * 0.28;
+    xc[15] = offset + Xc * 1.68; yc[15] = Yc * 0.72; radius[15] = R * 0.1;
+    xc[16] = offset + Xc * 1.56; yc[16] = Yc * 0.89; radius[16] = R * 0.09;
+    xc[17] = offset + Xc * 1.86; yc[17] = Yc * 0.63; radius[17] = R * 0.08;
+    xc[18] = offset + Xc * 1.83; yc[18] = Yc * 0.88; radius[18] = R * 0.10;
+
+
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[0], yc[0], radius[0]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[1], yc[1], radius[1]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[2], yc[2], radius[2]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[3], yc[3], radius[3]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[4], yc[4], radius[4]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[5], yc[5], radius[5]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[6], yc[6], radius[6]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[7], yc[7], radius[7]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[8], yc[8], radius[8]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[9], yc[9], radius[9]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[10], yc[10], radius[10]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[11], yc[11], radius[11]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[12], yc[12], radius[12]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[13], yc[13], radius[13]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[14], yc[14], radius[14]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[15], yc[15], radius[15]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[16], yc[16], radius[16]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[17], yc[17], radius[17]), new plb::BounceBack<T, DESCRIPTOR>);
+    defineDynamics(lattice, lattice.getBoundingBox(), new CylinderShapeDomain2D<T>(xc[18], yc[18], radius[18]), new plb::BounceBack<T, DESCRIPTOR>);
 
     lattice.initialize();
 }
@@ -204,8 +251,8 @@ int main(int argc, char* argv[]) {
     IncomprFlowParam<T> parameters(
             (T) 1e-2,  // uMax
             (T) 600.,  // Re
-            100,       // N
-            6.,        // lx
+            1000,       // N
+            2.,        // lx
             1.         // ly 
     );
     const T logT     = (T)0.02;
